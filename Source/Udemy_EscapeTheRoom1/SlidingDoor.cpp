@@ -24,10 +24,10 @@ void USlidingDoor::BeginPlay()
 	actorThatOpens = GetWorld()->GetFirstPlayerController()->GetPawn();
 }
 
-void USlidingDoor::OpenSlidingDoor()
+void USlidingDoor::OpenHiddenDoor()
 {
 	//Find the owner
-	AActor* owner = GetOwner();
+	owner = GetOwner();
 
 
 	if (owner && bisHidden == false)
@@ -40,13 +40,22 @@ void USlidingDoor::OpenSlidingDoor()
 		bisHidden = true;
 		
 	}
-	else if (owner && bisHidden == true)
+	
+	
+}
+
+void USlidingDoor::CloseHiddenDoor()
+{
+	//Find the owner
+	owner = GetOwner();
+
+	if (owner && bisHidden == true)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("object is not hidden: %b"), bisHidden)
-		bisHidden = false;
 		owner->SetActorHiddenInGame(false);
 		owner->SetActorEnableCollision(true);
 		owner->SetActorTickEnabled(true);
+		bisHidden = false;
 	}
 	
 	
@@ -60,7 +69,27 @@ void USlidingDoor::TickComponent(float DeltaTime, ELevelTick TickType, FActorCom
 
 	if (pressurePlate && pressurePlate->IsOverlappingActor(actorThatOpens))
 	{
-		OpenSlidingDoor();
+		OpenHiddenDoor();
+		lastHiddenDoorTime = GetWorld()->GetTimeSeconds();
 	}
+	
+	if (pressurePlate2 && pressurePlate2->IsOverlappingActor(actorThatOpens))
+	{
+		OpenHiddenDoor();
+		lastHiddenDoorTime = GetWorld()->GetTimeSeconds();
+	}
+	
+	if (pressurePlate3 && pressurePlate3->IsOverlappingActor(actorThatOpens))
+	{
+		OpenHiddenDoor();
+		lastHiddenDoorTime = GetWorld()->GetTimeSeconds();
+	}
+
+	if (GetWorld()->GetTimeSeconds() - lastHiddenDoorTime > HiddenDoorDelay)
+	{
+		CloseHiddenDoor();
+	}
+
+	
 }
 

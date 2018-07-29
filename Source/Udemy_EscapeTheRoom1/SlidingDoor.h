@@ -21,7 +21,8 @@ protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
 
-	void OpenSlidingDoor();
+	void OpenHiddenDoor();
+	void CloseHiddenDoor();
 
 public:	
 	// Called every frame
@@ -29,16 +30,24 @@ public:
 
 private:
 
-	UPROPERTY(EditAnywhere)
-	float openAngle = 90.0f;
-
 	bool bisHidden = false;
 
-	FTimerHandle* hideDoorTimer;
+	UPROPERTY(EditAnywhere)
+	float HiddenDoorDelay = 1.0f;
+
+	float lastHiddenDoorTime;
 
 	UPROPERTY(EditAnywhere)
-	ATriggerVolume* pressurePlate;
+	ATriggerVolume* pressurePlate;	
+	
+	UPROPERTY(EditAnywhere)
+	ATriggerVolume* pressurePlate2;
+	
+	UPROPERTY(EditAnywhere)
+	ATriggerVolume* pressurePlate3;
 
 	//UPROPERTY(EditAnywhere)
 	AActor* actorThatOpens;
+
+	AActor* owner;
 };
