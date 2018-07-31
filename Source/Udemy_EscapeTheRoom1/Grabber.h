@@ -4,6 +4,9 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+#include "Components/InputComponent.h"
+#include "Components/PrimitiveComponent.h"
+#include "PhysicsEngine/PhysicsHandleComponent.h"
 #include "Grabber.generated.h"
 
 
@@ -24,8 +27,26 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
+
+public:
+
+	void FindPhysicsHandleComponent();
+	void SetupInputComponent();
 private:
 
 	float Reach = 100.f;
+
+	UPhysicsHandleComponent* PhysicsHandle = nullptr;
+	UInputComponent* InputComponent = nullptr;
+	UPrimitiveComponent* ComponentToGrab;
+
+	FHitResult HitResult;
+	AActor* ActorHit;
+
+	void Grab();
+	void Release();
+
+	const FHitResult GetFirstPhysicsBodyInReach();
+	
 	
 };

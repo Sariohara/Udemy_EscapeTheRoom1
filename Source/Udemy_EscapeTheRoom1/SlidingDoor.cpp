@@ -26,14 +26,13 @@ void USlidingDoor::BeginPlay()
 
 void USlidingDoor::OpenHiddenDoor()
 {
-	//Find the owner
+	///Find the owner
 	owner = GetOwner();
 
-
+	///Check if door is hidden after overlapping trigger
 	if (owner && bisHidden == false)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("object is hidden: %b"), bisHidden)
-		//bisHidden = true;
+		///UE_LOG(LogTemp, Warning, TEXT("object is hidden: %b"), bisHidden)
 		owner->SetActorHiddenInGame(true);
 		owner->SetActorEnableCollision(false);
 		owner->SetActorTickEnabled(false);
@@ -46,9 +45,10 @@ void USlidingDoor::OpenHiddenDoor()
 
 void USlidingDoor::CloseHiddenDoor()
 {
-	//Find the owner
+	///Find the owner
 	owner = GetOwner();
 
+	///Check if door is hidden after overlapping trigger
 	if (owner && bisHidden == true)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("object is not hidden: %b"), bisHidden)
@@ -67,6 +67,7 @@ void USlidingDoor::TickComponent(float DeltaTime, ELevelTick TickType, FActorCom
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
+	///Check if player is on pressure plate
 	if (pressurePlate && pressurePlate->IsOverlappingActor(actorThatOpens))
 	{
 		OpenHiddenDoor();
