@@ -22,8 +22,9 @@ protected:
 	virtual void BeginPlay() override;
 
 	void OpenDoor();
-
 	void CloseDoor();
+
+	float GetTotalMassofPlayerOnPlate();
 
 public:	
 	// Called every frame
@@ -39,11 +40,10 @@ private:
 
 	float lastDoorOpenTime;
 
+	float TotalMass = 0.0f;
+
 	UPROPERTY(EditAnywhere)
 	ATriggerVolume* pressurePlate;
-
-	//UPROPERTY(EditAnywhere)
-	AActor* actorThatOpens;
 
 	AActor* Owner;
 

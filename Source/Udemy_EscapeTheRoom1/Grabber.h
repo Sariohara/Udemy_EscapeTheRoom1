@@ -32,6 +32,9 @@ public:
 
 	void FindPhysicsHandleComponent();
 	void SetupInputComponent();
+
+	FVector GetReachLineEnd();
+	FVector GetReachLineStart();
 private:
 
 	float Reach = 100.f;
