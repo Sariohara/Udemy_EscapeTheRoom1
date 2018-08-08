@@ -22,6 +22,21 @@ void USlidingDoor::BeginPlay()
 	Super::BeginPlay();
 
 	actorThatOpens = GetWorld()->GetFirstPlayerController()->GetPawn();
+
+	if (!pressurePlate)
+	{
+		UE_LOG(LogTemp, Error, TEXT("%s is missing pressurePlate"), *GetOwner()->GetName())
+	}
+	
+	if (!pressurePlate2)
+	{
+		UE_LOG(LogTemp, Error, TEXT("%s is missing pressurePlate"), *GetOwner()->GetName())
+	}
+	
+	if (!pressurePlate3)
+	{
+		UE_LOG(LogTemp, Error, TEXT("%s is missing pressurePlate"), *GetOwner()->GetName())
+	}
 }
 
 void USlidingDoor::OpenHiddenDoor()
@@ -51,7 +66,7 @@ void USlidingDoor::CloseHiddenDoor()
 	///Check if door is hidden after overlapping trigger
 	if (owner && bisHidden == true)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("object is not hidden: %b"), bisHidden)
+		/*UE_LOG(LogTemp, Warning, TEXT("object is not hidden: %b"), bisHidden)*/
 		owner->SetActorHiddenInGame(false);
 		owner->SetActorEnableCollision(true);
 		owner->SetActorTickEnabled(true);
@@ -68,6 +83,10 @@ void USlidingDoor::TickComponent(float DeltaTime, ELevelTick TickType, FActorCom
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
 	///Check if player is on pressure plate
+	if (!pressurePlate) { return; }
+	if (!pressurePlate2) { return; }
+	if (!pressurePlate3) { return; }
+
 	if (pressurePlate && pressurePlate->IsOverlappingActor(actorThatOpens))
 	{
 		OpenHiddenDoor();

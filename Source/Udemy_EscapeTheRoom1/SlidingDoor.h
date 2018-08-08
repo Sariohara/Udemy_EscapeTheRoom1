@@ -38,16 +38,16 @@ private:
 	float lastHiddenDoorTime;
 
 	UPROPERTY(EditAnywhere)
-	ATriggerVolume* pressurePlate;	
+	ATriggerVolume* pressurePlate = nullptr;
 	
 	UPROPERTY(EditAnywhere)
-	ATriggerVolume* pressurePlate2;
+	ATriggerVolume* pressurePlate2 = nullptr;
 	
 	UPROPERTY(EditAnywhere)
-	ATriggerVolume* pressurePlate3;
+	ATriggerVolume* pressurePlate3 = nullptr;
 
 	//UPROPERTY(EditAnywhere)
-	AActor* actorThatOpens;
+	AActor* actorThatOpens = nullptr;
 
-	AActor* owner;
+	AActor* owner = nullptr;
 };

@@ -41,10 +41,10 @@ private:
 
 	UPhysicsHandleComponent* PhysicsHandle = nullptr;
 	UInputComponent* InputComponent = nullptr;
-	UPrimitiveComponent* ComponentToGrab;
+	UPrimitiveComponent* ComponentToGrab = nullptr;
 
 	FHitResult HitResult;
-	AActor* ActorHit;
+	AActor* ActorHit = nullptr;
 
 	void Grab();
 	void Release();

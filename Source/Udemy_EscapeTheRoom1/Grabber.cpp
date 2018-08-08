@@ -39,7 +39,7 @@ void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
 	GetReachLineEnd();
-
+	if (!PhysicsHandle) { return; }
 	if (PhysicsHandle->GrabbedComponent)
 	{
 		PhysicsHandle->SetTargetLocation(GetReachLineEnd());
@@ -120,6 +120,7 @@ void UGrabber::Grab()
 	ComponentToGrab = HitResult.GetComponent();
 	ActorHit = HitResult.GetActor();
 
+	if (!PhysicsHandle) { return; }
 	if (ActorHit)
 	{
 		PhysicsHandle->GrabComponent(ComponentToGrab,
@@ -132,5 +133,6 @@ void UGrabber::Grab()
 
 void UGrabber::Release()
 {
+	if (!PhysicsHandle) { return; }
 	PhysicsHandle->ReleaseComponent();
 }
